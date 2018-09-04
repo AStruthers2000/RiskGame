@@ -8,10 +8,11 @@ import GraphicsMain
 import _thread as thread
 
 GraphicsMain = GraphicsMain.GraphicsMain()
+GraphicsMain.mainThread("Test")
 
-thread.start_new_thread(GraphicsMain.mainThread, ("MainGraphicsThread", ))
+#thread.start_new_thread(GraphicsMain.mainThread, ("MainGraphicsThread", ))
 
-CountryInfo = allCountries.CountryInfo()
+#CountryInfo = allCountries.CountryInfo()
 
 """while True:
     country = str(input("Choose a country: "))
