@@ -5,6 +5,7 @@ class Venezuela:
         self.adjCountries = ("Central America", "Brazil", "Peru")
         self.curPlayer = ""
         self.curPeople = 0
+        self.colliderPoints = [120,380, 260,380, 260,420, 120,420]
 
 class Peru:
     def __init__(self):
@@ -12,6 +13,7 @@ class Peru:
         self.adjCountries = ("Venezuela", "Brazil", "Argentina")
         self.curPlayer = ""
         self.curPeople = 0
+        self.colliderPoints = [120,460, 215,460, 215,535, 120,535]
 
 class Brazil:
     def __init__(self):
@@ -19,6 +21,7 @@ class Brazil:
         self.adjCountries = ("Venezuela", "Peru", "Argentina", "North Africa")
         self.curPlayer = ""
         self.curPeople = 0
+        self.colliderPoints = [220,425, 340,425, 340,600, 220,600]
 
 class Argentina:
     def __init__(self):
@@ -26,6 +29,7 @@ class Argentina:
         self.adjCountries = ("Peru", "Brazil")
         self.curPlayer = ""
         self.curPeople = 0
+        self.colliderPoints = [120,540, 215,540, 215,670, 120,670]
 
 southAmerica = {
     "venezuela": Venezuela(),

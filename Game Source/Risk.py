@@ -3,11 +3,21 @@ have each country as a dictionary with
 
 """
 import allCountries
+import GraphicsMain
 
-class Board:
-    def __init__(self, places):
-        self.countryInfo = places
+import _thread as thread
 
-board = Board(allCountries.countries)
+GraphicsMain = GraphicsMain.GraphicsMain()
 
-print(board.countryInfo)
+thread.start_new_thread(GraphicsMain.mainThread, ("MainGraphicsThread", ))
+
+CountryInfo = allCountries.CountryInfo()
+
+"""while True:
+    country = str(input("Choose a country: "))
+    print(CountryInfo.LookupContinentByCountry(country))
+    print(CountryInfo.GetBorderingCountries(country))
+    print(CountryInfo.GetCurrentOccupent(country))
+    print(CountryInfo.GetCurrentSoliderCount(country))
+    
+"""
