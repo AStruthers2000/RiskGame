@@ -1,11 +1,23 @@
 class GraphicsMain:
-    
+
+    def updateBoard(self, frame, canvas, continents):#more stuff probably
+        from tkinter import W
+        for continentName, countryGroup in continents.items():
+            for countryName, country in continents[continentName].items():
+                canvas.create_text(country.textPos[0],
+                                   country.textPos[1],
+                                   anchor=W,
+                                   fill=country.textColor,
+                                   font="Times",
+                                   text=country.curPeople)
+                
     def mainThread(self, threadName):
         import tkinter as tk
         from tkinter import Canvas
-        from tkinter import Frame
         from PIL import Image
         from PIL import ImageTk
+        import _thread as thread
+
         import Rectangle
         import allCountries
 
@@ -13,7 +25,7 @@ class GraphicsMain:
             print("Pressed: " + repr(event.char))
 
         def on_click(event):
-            #print("Clicked at: " + str(event.x) + ", " + str(event.y))
+            print("Clicked at: " + str(event.x) + ", " + str(event.y))
             CountryInfo = allCountries.CountryInfo()
             clickedOnCountry = CountryInfo.GetCountryNameByClick([event.x, event.y])
             print(clickedOnCountry + ", bordered by: ")
@@ -23,6 +35,8 @@ class GraphicsMain:
             print("\t\tWith: " + str(CountryInfo.GetCurrentSoliderCount(clickedOnCountry)) + " soliders")
             
         frame = tk.Tk()
+
+        frame.title(threadName)
 
         #creating the canvas
         canvas = Canvas(width=1000, height = 664, bg="black")
@@ -39,19 +53,20 @@ class GraphicsMain:
         #test: drawing rectangles   
         """country = [930,440, 1000,440, 1000,550, 930,550]
         canvas.create_polygon(country, fill='red', outline='black')
-        continents = allCountries.continents"""
+        """
 
         #uncomment for collider debugging
         """
+        continents = allCountries.continents
         for continentName, countryGroup in continents.items():
             for countryName, country in continents[continentName].items():
                 canvas.create_polygon(country.colliderPoints, fill='red', outline='black')
         """
+
         
+        thread.start_new_thread(GraphicsMain().updateBoard, (frame, canvas, allCountries.continents, ))
 
         #starting frame loop
         frame.mainloop()
-
-#GraphicsMain().mainThread("Test")
 
         

@@ -6,6 +6,8 @@ class Ural:
         self.curPlayer = ""
         self.curPeople = 0
         self.colliderPoints = [665,0, 740,0, 740,165, 665,165]
+        self.textPos = [700,95]
+        self.textColor = "ghost white"
 
 class Siberia:
     def __init__(self):
@@ -14,6 +16,8 @@ class Siberia:
         self.curPlayer = ""
         self.curPeople = 0
         self.colliderPoints = [745,0, 805,0, 805,170, 745,170]
+        self.textPos = [770,80]
+        self.textColor = "ghost white"
 
 class Yakutsk:
     def __init__(self):
@@ -22,6 +26,8 @@ class Yakutsk:
         self.curPlayer = ""
         self.curPeople = 0
         self.colliderPoints = [810,0, 955,0, 955,55, 810,55]
+        self.textPos = [885,30]
+        self.textColor = "ghost white"
 
 class Irkutsk:
     def __init__(self):
@@ -30,6 +36,8 @@ class Irkutsk:
         self.curPlayer = ""
         self.curPeople = 0
         self.colliderPoints = [810,60, 880,60, 880,165, 810,165]
+        self.textPos = [835,130]
+        self.textColor = "ghost white"
 
 class Kamchatka:
     def __init__(self):
@@ -38,6 +46,8 @@ class Kamchatka:
         self.curPlayer = ""
         self.curPeople = 0
         self.colliderPoints = [885,65, 1000,65, 1000,170, 885,170]
+        self.textPos = [915,90]
+        self.textColor = "ghost white"
 
 class MiddleEast:
     def __init__(self):
@@ -46,6 +56,8 @@ class MiddleEast:
         self.curPlayer = ""
         self.curPeople = 0
         self.colliderPoints = [585,305, 680,305, 680,395, 585,395]
+        self.textPos = [605,335]
+        self.textColor = "ghost white"
 
 class Afghanistan:
     def __init__(self):
@@ -54,6 +66,8 @@ class Afghanistan:
         self.curPlayer = ""
         self.curPeople = 0
         self.colliderPoints = [620,205, 735,205, 735,295, 620,295]
+        self.textPos = [670,220]
+        self.textColor = "ghost white"
 
 class India:
     def __init__(self):
@@ -62,6 +76,8 @@ class India:
         self.curPlayer = ""
         self.curPeople = 0
         self.colliderPoints = [680,300, 765,300, 765,390, 680,390]
+        self.textPos = [725,355]
+        self.textColor = "ghost white"
 
 class China:
     def __init__(self):
@@ -70,6 +86,9 @@ class China:
         self.curPlayer = ""
         self.curPeople = 0
         self.colliderPoints = [740,220, 865,220, 865,305, 740,305]
+        self.textPos = [770,280]
+        self.textColor = "ghost white"
+        
 
 class Mongolia:
     def __init__(self):
@@ -78,6 +97,8 @@ class Mongolia:
         self.curPlayer = ""
         self.curPeople = 0
         self.colliderPoints = [785,170, 890,170, 890,225, 785,225]
+        self.textPos = [850,185]
+        self.textColor = "ghost white"
 
 class Japan:
     def __init__(self):
@@ -86,6 +107,8 @@ class Japan:
         self.curPlayer = ""
         self.curPeople = 0
         self.colliderPoints = [905,175, 940,175, 940,255, 905,255]
+        self.textPos = [950,215]
+        self.textColor = "ghost white"
 
 class Siam:
     def __init__(self):
@@ -94,6 +117,8 @@ class Siam:
         self.curPlayer = ""
         self.curPeople = 0
         self.colliderPoints = [775,305, 845,305, 845,355, 775,355]
+        self.textPos = [805,310]
+        self.textColor = "ghost white"
 
 asia = {
     "ural": Ural(),

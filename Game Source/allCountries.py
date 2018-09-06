@@ -24,6 +24,13 @@ continents = {
             print("\t" + adjCount)
 """
 
+"""def isValidAttack(self, countryFrom, countryTo, playerName):
+        countryFrom = countryFrom.lower()
+        countryTo = countryTo.lower()
+
+        if playerName == GetCurrentOccupent(countryTo):
+            """
+
 class CountryInfo:
     def LookupContinentByCountry(self, userCountryName):
         userCountryName = userCountryName.lower()
@@ -53,13 +60,6 @@ class CountryInfo:
                 if countryName.lower() == userCountryName.lower():
                     return country.curPeople
 
-    """def isValidAttack(self, countryFrom, countryTo, playerName):
-        countryFrom = countryFrom.lower()
-        countryTo = countryTo.lower()
-
-        if playerName == GetCurrentOccupent(countryTo):
-            """
-
     def GetCountryNameByClick(self, click):
         import Rectangle
         Rectangle = Rectangle.Rectangle()
@@ -67,3 +67,10 @@ class CountryInfo:
             for countryName, country in continents[continentName].items():
                 if Rectangle.contains(click, country.colliderPoints):
                     return country.name
+
+    def GetCountryTextPos(self, userCountryName):
+        userCountryName = userCountryName.lower()
+        for continentName, countryGroup in continents.items():
+            for countryName, country in continents[continentName].items():
+                if countryName.lower() == userCountryName.lower():
+                    return country.textPos

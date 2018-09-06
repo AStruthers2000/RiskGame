@@ -6,6 +6,8 @@ class Iceland:
         self.curPlayer = ""
         self.curPeople = 0
         self.colliderPoints = [445,75, 480,75, 480,100, 445,100]
+        self.textPos = [465,65]
+        self.textColor = "ghost white"
 
 class Scandinavia:
     def __init__(self):
@@ -14,6 +16,8 @@ class Scandinavia:
         self.curPlayer = ""
         self.curPeople = 0
         self.colliderPoints = [485,60, 550,60, 550,190, 485,190]
+        self.textPos = [500,140]
+        self.textColor = "ghost white"
 
 class Ukraine:
     def __init__(self):
@@ -22,6 +26,8 @@ class Ukraine:
         self.curPlayer = ""
         self.curPeople = 0
         self.colliderPoints = [550,55, 660,55, 660,200, 550,200]
+        self.textPos = [600,140]
+        self.textColor = "ghost white"
 
 class GreatBritain:
     def __init__(self):
@@ -30,6 +36,8 @@ class GreatBritain:
         self.curPlayer = ""
         self.curPeople = 0
         self.colliderPoints = [415,195, 470,195, 470,250, 415,250]
+        self.textPos = [455,240]
+        self.textColor = "ghost white"
 
 class NorthernEurope:
     def __init__(self):
@@ -38,6 +46,8 @@ class NorthernEurope:
         self.curPlayer = ""
         self.curPeople = 0
         self.colliderPoints = [475,210, 540,210, 540,265, 475,265]
+        self.textPos = [500,250]
+        self.textColor = "ghost white"
 
 class WesternEurope:
     def __init__(self):
@@ -46,6 +56,8 @@ class WesternEurope:
         self.curPlayer = ""
         self.curPeople = 0
         self.colliderPoints = [405,270, 490,270, 490,330, 405,330]
+        self.textPos = [465,290]
+        self.textColor = "ghost white"
 
 class SouthernEurope:
     def __init__(self):
@@ -54,6 +66,8 @@ class SouthernEurope:
         self.curPlayer = ""
         self.curPeople = 0
         self.colliderPoints = [495,265, 550,265, 550,320, 495,320]
+        self.textPos = [535,270]
+        self.textColor = "ghost white"
 
 europe = {
     "iceland": Iceland(),
