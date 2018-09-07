@@ -1,7 +1,8 @@
 class GraphicsMain:
-
+    
     def updateBoard(self, frame, canvas, continents):#more stuff probably
         from tkinter import W
+        
         for continentName, countryGroup in continents.items():
             for countryName, country in continents[continentName].items():
                 canvas.create_text(country.textPos[0],
@@ -18,6 +19,7 @@ class GraphicsMain:
         from PIL import ImageTk
         import _thread as thread
 
+        from GameFunctions import GameFunctions
         import Rectangle
         import allCountries
 
@@ -36,6 +38,7 @@ class GraphicsMain:
             
         frame = tk.Tk()
 
+        frame.state("zoomed")
         frame.title(threadName)
 
         #creating the canvas
@@ -46,6 +49,10 @@ class GraphicsMain:
         image = Image.open("RiskBoard.jpg")
         photo = ImageTk.PhotoImage(image)
         canvas.create_image(0,0, image=photo, anchor="nw")
+
+        """image = Image.open("TextBox.jpg")
+        photo = ImageTk.PhotoImage(image)
+        canvas.create_image(100,100, image=photo, anchor="nw")"""
 
         #binding click event
         canvas.bind("<Button-1>", on_click)
@@ -63,9 +70,11 @@ class GraphicsMain:
                 canvas.create_polygon(country.colliderPoints, fill='red', outline='black')
         """
 
-        
+    
+        #init game
         thread.start_new_thread(GraphicsMain().updateBoard, (frame, canvas, allCountries.continents, ))
-
+        #thread.start_new_thread(GameFunctions.initGame, (frame, canvas, canvas))
+        
         #starting frame loop
         frame.mainloop()
 

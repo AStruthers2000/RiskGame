@@ -2,6 +2,7 @@
 have each country as a dictionary with
 
 """
+
 import allCountries
 import GraphicsMain
 
@@ -9,4 +10,5 @@ import _thread as thread
 
 GraphicsMain = GraphicsMain.GraphicsMain()
 GraphicsMain.mainThread("Risk!")
+
 
