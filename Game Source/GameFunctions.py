@@ -1,24 +1,40 @@
+        
 class GameFunctions:
     def __init__(self):
         self.curX = 1000
         self.curY = 0
+        self.inputText = ""
 
-    def initGame(self, frame, canvas):
-        from PIL import Image
-        from PIL import ImageTk
+    def ask(self,inputArg):
+        import tkinter as tk
+        from tkinter import Button
         from tkinter import Label
         from tkinter import Entry
-        import GraphicsMain
 
-        """def get_info(self, entry):
-            print(entry.get())
+        def get_text():
+            self.text = playerEntry.get()
+            inputFrame.destroy()   
 
-        Label(canvas, text = "Amount of players: ").grid(row=0)
-        entry = Entry(frame)
-        entry.grid(row=0, column=1)"""
+        inputFrame = tk.Tk()
+
+        inputFrame.title("Input")
+        Label(inputFrame, text=inputArg).grid(row=0)
+
+        playerEntry = Entry(inputFrame)
+        playerEntry.grid(row=0, column=1)
+
+        Button(inputFrame, text="Quit", command=inputFrame.quit).grid(row=2, column=0, sticky='w', pady=4)
+        Button(inputFrame, text="Enter", command=get_text).grid(row=2, column=1, sticky='w', pady=4)
+
+        inputFrame.mainloop()
+
+        return self.text
+    
+    def initGame(self, frame, canvas):
+
+        playerNum = int(self.ask("How many players?"))
 
         players = []
-        playerNum = int(input("Amount of players: "))
         colors = ["red2", "yellow", "blue2", "lime green", "gray2", "saddle brown"]
         inputColors = {
             "red": colors[0],
@@ -31,22 +47,40 @@ class GameFunctions:
         takenColors = []
 
         for i in range(playerNum):
-            playerName = input("Whats your name: ")
-            print("Hello " + playerName + ". What color?")
+            playerName = self.ask("What's your name?")
+            text = "Hello " + playerName + ". What color?\n"
             for name,real in inputColors.items():
                 if not name in takenColors:
-                    print("\t" + name)
-            color = input("")
+                    text += "\t" + name + "\n"
+            color = self.ask(text)
             takenColors += [color]
             playerColor = inputColors[color]
             players += [(playerName, playerColor)]
 
         print(players)
         totalArmies = 35 - (playerNum-3)*5
-        """for j in range(totalArmies):
+
+        from GraphicsMain import GraphicsMain
+        import os, time
+        import allCountries
+        CountryInfo = allCountries.CountryInfo()
+        print(totalArmies)
+        for j in range(totalArmies):
             for k in players:
                 print(k[0] + " pick a country: ")
-                print(GraphicsMain.GraphicsMain().currentClickedCountry)"""              
+                while True:
+                    time.sleep(0.5)
+                    if os.path.exists("CurrentClickedCountry.txt"):
+                        file = open("CurrentClickedCountry.txt", "r")
+                        country = file.read().strip("\n")
+                        print(k[0] + " picks " + country)
+                        file.close()
+                        os.remove("CurrentClickedCountry.txt")
+                        CountryInfo.ChangeCountryColor(country, k[1])
+                        CountryInfo.ChangeCountryArmyCount(country, 1)
+                        break
+                    else:
+                        continue          
         
         print("Game inited")
 

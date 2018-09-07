@@ -74,3 +74,15 @@ class CountryInfo:
             for countryName, country in continents[continentName].items():
                 if countryName.lower() == userCountryName.lower():
                     return country.textPos
+
+    def ChangeCountryColor(self, userCountryName, newColor):
+        for continentName, countryGroup in continents.items():
+            for countryName, country in continents[continentName].items():
+                if countryName.lower() == userCountryName.lower():
+                    country.textColor = newColor
+
+    def ChangeCountryArmyCount(self, userCountryName, numChange):
+        for continentName, countryGroup in continents.items():
+            for countryName, country in continents[continentName].items():
+                if countryName.lower() == userCountryName.lower():
+                    country.curPeople += numChange

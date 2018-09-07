@@ -1,21 +1,24 @@
 class GraphicsMain:
-
-    def __init__(self):
-        self.currentClickedCountry = ""
     
-    def updateBoard(self, frame, canvas, continents):#more stuff probably
+    def updateBoard(self, frame, canvas):#more stuff probably
         from tkinter import W
         from time import sleep
 
         while True:
+            import allCountries
+            continents = allCountries.continents
+
+            canvas.delete("armyCount")
             for continentName, countryGroup in continents.items():
                 for countryName, country in continents[continentName].items():
+                    
                     canvas.create_text(country.textPos[0],
                                        country.textPos[1],
                                        anchor=W,
                                        fill=country.textColor,
                                        font="Times",
-                                       text=country.curPeople)
+                                       text=country.curPeople,
+                                       tag="armyCount")
             sleep(0.5)
   
     def mainThread(self, threadName):
@@ -44,7 +47,9 @@ class GraphicsMain:
                 CountryInfo = allCountries.CountryInfo()
                 text = ""
                 clickedOnCountry = CountryInfo.GetCountryNameByClick([event.x, event.y])
-                self.currentClickedCountry = clickedOnCountry
+                file = open("CurrentClickedCountry.txt", "w")
+                file.write(clickedOnCountry)
+                file.close()
                 text += str(clickedOnCountry + ", bordered by: \n")
                 for i in CountryInfo.GetBorderingCountries(clickedOnCountry):
                     text += str("\t\t" + i + "\n")
@@ -56,7 +61,7 @@ class GraphicsMain:
 
         frame.iconbitmap(default="icon.ico")
         frame.state("zoomed")
-        frame.attributes("-fullscreen", True)
+        #frame.attributes("-fullscreen", True)
         frame.title(threadName)
 
         #creating the canvas
@@ -95,7 +100,7 @@ class GraphicsMain:
 
     
         #init game
-        thread.start_new_thread(GraphicsMain().updateBoard, (frame, canvas, allCountries.continents, ))
+        thread.start_new_thread(GraphicsMain().updateBoard, (frame, canvas, ))
         thread.start_new_thread(GameFunctions.initGame, (frame, canvas,))
         
         #starting frame loop
