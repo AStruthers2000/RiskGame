@@ -8,8 +8,6 @@ class Alaska:
         self.colliderPoints = [0,0,75,0,75,125,0,125]
         self.textPos = [55,75]
         self.textColor = "ghost white"
-        #normal risk colors are
-        #black, blue, yellow, red, green, brown
 
 class NWTerritory:
     def __init__(self):

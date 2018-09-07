@@ -1,0 +1,5 @@
+136+80+47+69+47+102 = 481 (country classes)
+76+61+26 = 163 (functions)
+102 (graphics thread)
+12 (main)
+=758 (total)
