@@ -5,7 +5,7 @@ class GraphicsMain:
     
     def updateBoard(self, frame, canvas, continents):#more stuff probably
         from tkinter import W
-        import sleep
+        from time import sleep
 
         while True:
             for continentName, countryGroup in continents.items():
@@ -16,7 +16,7 @@ class GraphicsMain:
                                        fill=country.textColor,
                                        font="Times",
                                        text=country.curPeople)
-            time.sleep(0.5)
+            sleep(0.5)
   
     def mainThread(self, threadName):
         import tkinter as tk
@@ -56,7 +56,7 @@ class GraphicsMain:
 
         frame.iconbitmap(default="icon.ico")
         frame.state("zoomed")
-        #frame.attributes("-fullscreen", True)
+        frame.attributes("-fullscreen", True)
         frame.title(threadName)
 
         #creating the canvas
