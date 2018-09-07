@@ -1,17 +1,23 @@
 class GraphicsMain:
+
+    def __init__(self):
+        self.currentClickedCountry = ""
     
     def updateBoard(self, frame, canvas, continents):#more stuff probably
         from tkinter import W
-        
-        for continentName, countryGroup in continents.items():
-            for countryName, country in continents[continentName].items():
-                canvas.create_text(country.textPos[0],
-                                   country.textPos[1],
-                                   anchor=W,
-                                   fill=country.textColor,
-                                   font="Times",
-                                   text=country.curPeople)
-                
+        import sleep
+
+        while True:
+            for continentName, countryGroup in continents.items():
+                for countryName, country in continents[continentName].items():
+                    canvas.create_text(country.textPos[0],
+                                       country.textPos[1],
+                                       anchor=W,
+                                       fill=country.textColor,
+                                       font="Times",
+                                       text=country.curPeople)
+            time.sleep(0.5)
+  
     def mainThread(self, threadName):
         import tkinter as tk
         from tkinter import Canvas
@@ -19,41 +25,48 @@ class GraphicsMain:
         from PIL import ImageTk
         import _thread as thread
 
-        from GameFunctions import GameFunctions
+        import GameFunctions
         import Rectangle
         import allCountries
 
+        GameFunctions = GameFunctions.GameFunctions()
+
         def key(event):
-            print("Pressed: " + repr(event.char))
+            GameFunctions.printOnScreen(canvas, str("Pressed: " + repr(event.char)))
 
         def on_click(event):
+            import Rectangle
             print("Clicked at: " + str(event.x) + ", " + str(event.y))
-            CountryInfo = allCountries.CountryInfo()
-            clickedOnCountry = CountryInfo.GetCountryNameByClick([event.x, event.y])
-            print(clickedOnCountry + ", bordered by: ")
-            for i in CountryInfo.GetBorderingCountries(clickedOnCountry):
-                print("\t\t" + i)
-            print("\tOccupied by: " + CountryInfo.GetCurrentOccupent(clickedOnCountry))
-            print("\t\tWith: " + str(CountryInfo.GetCurrentSoliderCount(clickedOnCountry)) + " soliders")
-            
+
+            if Rectangle.Rectangle().contains([event.x,event.y], [1256,664,2000,664,2000,2000,1256,2000]):
+                frame.destroy()
+            else:
+                CountryInfo = allCountries.CountryInfo()
+                text = ""
+                clickedOnCountry = CountryInfo.GetCountryNameByClick([event.x, event.y])
+                self.currentClickedCountry = clickedOnCountry
+                text += str(clickedOnCountry + ", bordered by: \n")
+                for i in CountryInfo.GetBorderingCountries(clickedOnCountry):
+                    text += str("\t\t" + i + "\n")
+                text += str("\tOccupied by: " + CountryInfo.GetCurrentOccupent(clickedOnCountry) + "\n")
+                text += str("\t\tWith: " + str(CountryInfo.GetCurrentSoliderCount(clickedOnCountry)) + " armies\n")
+                GameFunctions.printOnScreen(canvas, str(text))
+                
         frame = tk.Tk()
 
         frame.iconbitmap(default="icon.ico")
         frame.state("zoomed")
+        #frame.attributes("-fullscreen", True)
         frame.title(threadName)
 
         #creating the canvas
-        canvas = Canvas(width=1000, height = 664, bg="black")
+        canvas = Canvas(width=10000, height = 10000, bg="black")
         canvas.pack()
 
         #adding image
-        image = Image.open("RiskBoard.jpg")
-        photo = ImageTk.PhotoImage(image)
-        canvas.create_image(0,0, image=photo, anchor="nw")
-
-        """image = Image.open("TextBox.jpg")
-        photo = ImageTk.PhotoImage(image)
-        canvas.create_image(100,100, image=photo, anchor="nw")"""
+        board = Image.open("RiskBoard.jpg")
+        boardPhoto = ImageTk.PhotoImage(board)
+        canvas.create_image(0,0, image=boardPhoto, anchor="nw")
 
         #binding click event
         canvas.bind("<Button-1>", on_click)
@@ -63,6 +76,15 @@ class GraphicsMain:
         canvas.create_polygon(country, fill='red', outline='black')
         """
 
+        #drawing all images
+        canvas.create_polygon([0,664,10000,664,10000,10000,0,10000],fill="ghost white")
+        guide = Image.open("ScoringGuide.jpg")
+        guidePhoto = ImageTk.PhotoImage(guide)
+        canvas.create_image(0,664, image=guidePhoto, anchor="nw")
+        end = Image.open("Exit.jpg")
+        endPhoto = ImageTk.PhotoImage(end)
+        canvas.create_image(1256,664, image=endPhoto, anchor="nw")
+        
         #uncomment for collider debugging
         """
         continents = allCountries.continents
@@ -74,7 +96,7 @@ class GraphicsMain:
     
         #init game
         thread.start_new_thread(GraphicsMain().updateBoard, (frame, canvas, allCountries.continents, ))
-        #thread.start_new_thread(GameFunctions.initGame, (frame, canvas, canvas))
+        thread.start_new_thread(GameFunctions.initGame, (frame, canvas,))
         
         #starting frame loop
         frame.mainloop()
