@@ -38,6 +38,7 @@ class GraphicsMain:
             
         frame = tk.Tk()
 
+        frame.iconbitmap(default="icon.ico")
         frame.state("zoomed")
         frame.title(threadName)
 
